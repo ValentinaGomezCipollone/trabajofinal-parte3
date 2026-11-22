@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documentación del sistema · Bomberos Voluntarios de Berisso</title>
+  <meta name="description" content="Sistema de diseño del sitio: variables, componentes y decisiones técnicas.">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<svg width="0" height="0" class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></symbol>
+  <symbol id="i-cerrar" viewBox="0 0 24 24"><path d="M6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6L19 6.4 17.6 5 12 10.6z"/></symbol>
+  <symbol id="i-llama" viewBox="0 0 24 24"><path d="M12.5 1.5c.9 3.6-1.6 5.6-3.1 7.6C8 11 7 12.8 7 15a5 5 0 0 0 10 0c0-2.6-1.4-4.4-2.5-5.7.2 1.7-.3 2.9-1.4 3.5.5-3.7-.4-7.6-.6-11.3z"/></symbol>
+  <symbol id="i-auto" viewBox="0 0 24 24"><path d="M5 11l1.5-4.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11v7a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H8v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1zm2.2-1h9.6l-1-3H8.2zM7.5 15a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm9 0a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></symbol>
+  <symbol id="i-huella" viewBox="0 0 24 24"><path d="M12 11c-3 0-6 3.6-6 6.2 0 1.7 1.5 2.6 3 2.1 1.2-.4 2-.8 3-.8s1.8.4 3 .8c1.5.5 3-.4 3-2.1C18 14.6 15 11 12 11zM5 7a2 2.5 0 1 0 0 5 2 2.5 0 0 0 0-5zm14 0a2 2.5 0 1 0 0 5 2 2.5 0 0 0 0-5zM9 2.5a2 2.5 0 1 0 0 5 2 2.5 0 0 0 0-5zm6 0a2 2.5 0 1 0 0 5 2 2.5 0 0 0 0-5z"/></symbol>
+  <symbol id="i-gota" viewBox="0 0 24 24"><path d="M12 2.5S5 10.2 5 15a7 7 0 0 0 14 0c0-4.8-7-12.5-7-12.5z"/></symbol>
+  <symbol id="i-megafono" viewBox="0 0 24 24"><path d="M3 10v4h3l5 4V6l-5 4zm13.5 2A4.5 4.5 0 0 0 14 8v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></symbol>
+  <symbol id="i-casco" viewBox="0 0 24 24"><path d="M2 17h20v2.5H2zM4 16a8 8 0 0 1 6-7.7V5h4v3.3A8 8 0 0 1 20 16z"/></symbol>
+  <symbol id="i-telefono" viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.4 2.35.6 3.6.6a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.6 3.6a1 1 0 0 1-.25 1z"/></symbol>
+  <symbol id="i-sirena" viewBox="0 0 24 24"><path d="M12 5a6 6 0 0 0-6 6v5h12v-5a6 6 0 0 0-6-6zM4 17h16v3H4zM11 1h2v2.5h-2zM2.3 5.2l1.4-1.4 1.8 1.8-1.4 1.4zm15.9.4 1.8-1.8 1.4 1.4-1.8 1.8z"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zm5.3-4a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></symbol>
+  <symbol id="i-ubicacion" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></symbol>
+</svg>
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="encabezado">
+    <div class="grilla encabezado__grilla">
+      <a class="encabezado__marca" href="index.html" aria-label="Inicio: Bomberos voluntarios de Berisso">Bomberos voluntarios <span>de Berisso</span></a>
+      <a class="encabezado__abrir" href="#menu" aria-label="Abrir menú"><svg width="20" height="20" class="icono" aria-hidden="true" focusable="false"><use href="#i-menu"/></svg></a>
+      <nav class="navegacion" id="menu" aria-label="Principal">
+        <a class="navegacion__cerrar" href="#" aria-label="Cerrar menú"><svg width="20" height="20" class="icono" aria-hidden="true" focusable="false"><use href="#i-cerrar"/></svg></a>
+        <ul class="navegacion__lista">
+          <li><a href="historia.html">Quiénes somos</a></li>
+          <li><a href="que-hacemos.html">Qué hacemos</a></li>
+          <li><a href="asociate.html">Asociate</a></li>
+          <li><a href="sumate.html">Sumate</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="documentacion.html" aria-current="page">Documentación</a></li>
+        </ul>
+        <p class="navegacion__emergencia emergencia">En una emergencia, llamá al <a class="emergencia__numero" href="tel:100">100</a></p>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero hero--liso" aria-labelledby="titulo-hero">
+      <div class="hero__contenido">
+        <div class="grilla hero__grilla">
+          <p class="etiqueta etiqueta--grande">Sistema de diseño</p>
+          <h1 class="hero__titulo hero__titulo--normal" id="titulo-hero">Documentación</h1>
+          <p class="hero__bajada">Variables, componentes y decisiones técnicas detrás del sitio.</p>
+        </div>
+      </div>
+    </section>
+
+    <aside class="franja" aria-label="Teléfonos de emergencia">
+      <div class="grilla">
+        <div class="franja__grilla">
+          <p class="emergencia">En una emergencia, llamá al <a class="emergencia__numero" href="tel:100">100</a></p>
+          <p class="emergencia">Teléfono <a class="emergencia__numero" href="tel:+542214612425">(0221) 461-2425</a></p>
+        </div>
+      </div>
+    </aside>
+
+    <section class="seccion documentacion" id="caso" aria-labelledby="titulo-caso">
+      <div class="grilla">
+        <h2 class="seccion__titulo" id="titulo-caso">a) Sobre el caso</h2>
+        <div class="documentacion__texto">
+          <p>La Sociedad de Bomberos Voluntarios de Berisso es una asociación civil sin fines de lucro fundada el 25 de abril de 1924. Tiene un cuartel central y dos destacamentos (El Carmen y Villa Zula), con alrededor de cien integrantes que prestan servicio sin remuneración. Se sostiene con el aporte de vecinos, socios y empresas locales.</p>
+          <h3 class="documentacion__subtitulo">Por qué elegí esta organización</h3>
+          <p>Tengo un vínculo cercano con el cuartel: mi tío es bombero voluntario y pude entrevistarlo, lo que me dio información de primera mano sobre cómo funciona la institución, cómo se asocia la gente y cómo es el ingreso al cuerpo activo. Además, los Bomberos Voluntarios de Berisso no tienen un sitio propio: su presencia web se limita a Instagram y a una sección mínima en el sitio nacional, y dependen de que la comunidad se asocie y se sume.</p>
+          <h3 class="documentacion__subtitulo">Público</h3>
+          <ul>
+            <li>Vecinos y vecinas de Berisso que pueden asociarse o colaborar.</li>
+            <li>Personas de cualquier género que quieran sumarse como bomberos o bomberas.</li>
+            <li>Familias, escuelas y empresas a las que se orientan las charlas y la prevención.</li>
+          </ul>
+          <h3 class="documentacion__subtitulo">Objetivo</h3>
+          <p>Convocar: que más vecinos se asocien y más personas se sumen al cuerpo activo. Como objetivo secundario, informar y visibilizar qué hace la institución más allá de apagar incendios.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion seccion--compacta documentacion" id="referencia" aria-labelledby="titulo-referencia">
+      <div class="grilla">
+        <h2 class="seccion__titulo" id="titulo-referencia">b) Análisis de referencia</h2>
+        <div class="documentacion__texto">
+          <h3 class="documentacion__subtitulo">Sistema analizado</h3>
+          <p>El sitio del Sistema Nacional de Bomberos Voluntarios (<a class="enlace" href="https://www.bomberosra.org.ar/">bomberosra.org.ar</a>), publicado por el Consejo Nacional. Lo elegí porque trata el mismo tema: al ser una organización del mismo rubro, sirvió de referencia directa para tomar decisiones. Berisso tiene una sección ahí, pero es mínima, y eso confirmó la necesidad de un sitio propio.</p>
+          <h3 class="documentacion__subtitulo">Qué aprendí</h3>
+          <p>Lo que más me sirvió fue la organización. El encabezado tiene la marca a la izquierda y la navegación en mayúsculas. Después viene un hero con foto y un llamado directo a la acción ("Quiero ser Bombero Voluntario" y un botón "Conocer más"). Las noticias se muestran en tarjetas con título, resumen y enlace, y hay bloques de cifras grandes con una etiqueta corta (bomberos, asociaciones, federaciones). La jerarquía es clara: títulos de sección en mayúsculas y botones bien visibles.</p>
+          <p>También vi lo que no se ajustaba a mi caso. El menú está pensado para la institución (legislación, compras, operaciones) más que para el vecino, no muestra un número de emergencia y el contenido es nacional, con poca información local.</p>
+          <h3 class="documentacion__subtitulo">Qué tomé para este sistema</h3>
+          <ul>
+            <li><strong>Hero con foto y llamado a la acción:</strong> mi portada con la foto al 26 % sobre rojo y los botones Asociate y Sumate al cuerpo activo.</li>
+            <li><strong>Encabezado:</strong> oscuro, con la marca a la izquierda y la navegación a la derecha (<code>.encabezado</code>).</li>
+            <li><strong>Cifras destacadas:</strong> el componente <code>.dato</code> (1924, 3 cuarteles, 30 h por mes).</li>
+            <li><strong>Tarjetas:</strong> la <code>.tarjeta</code> de servicios, con etiqueta, título, texto y "Ver más".</li>
+            <li><strong>Títulos en mayúsculas y colores del rubro:</strong> rojo y negro son los colores asociados a los bomberos, por eso la paleta es parecida.</li>
+          </ul>
+          <p>Lo que cambié a partir del análisis: el 100 siempre visible en la <code>.franja</code>, un menú pensado para el vecino (Quiénes somos, Qué hacemos, Asociate, Sumate, Contacto) y contenido local de Berisso.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion seccion--compacta documentacion" id="variables" aria-labelledby="titulo-variables">
+      <div class="grilla">
+        <h2 class="seccion__titulo" id="titulo-variables">c) Variables del sistema</h2>
+        <div class="documentacion__texto">
+          <p>Todas se declaran en <code>:root</code>. Los nombres llevan las tildes quitadas (<code>--tipo-pequeno</code>, <code>--color-informacion</code>) para evitar problemas de codificación. Los tonos derivados (<code>--color-acento-legible</code>, <code>--color-texto-suave</code>) se calculan con <code>color-mix()</code> a partir de la paleta, sin sumar colores nuevos. La foto del hero se ve roja porque está al 26 % (<code>--opacidad-imagen-hero</code>) sobre el fondo <code>--color-primario</code>.</p>
+        </div>
+        <h3 class="documentacion__subtitulo">Paleta</h3>
+        <ul class="muestras">
+          <li class="muestra-color" style="--muestra: var(--color-primario)">
+            <p class="muestra-color__datos"><code>--color-primario</code> <strong>#c1121f</strong> <span>Rojo: botones, enlaces y llamados a asociarse o sumarse</span></p>
+          </li>
+          <li class="muestra-color" style="--muestra: var(--color-secundario)">
+            <p class="muestra-color__datos"><code>--color-secundario</code> <strong>#111111</strong> <span>Negro: encabezado, pie y bloques oscuros</span></p>
+          </li>
+          <li class="muestra-color" style="--muestra: var(--color-acento)">
+            <p class="muestra-color__datos"><code>--color-acento</code> <strong>#ff8f0e</strong> <span>Naranja: detalles y destacados</span></p>
+          </li>
+          <li class="muestra-color" style="--muestra: var(--color-informacion)">
+            <p class="muestra-color__datos"><code>--color-informacion</code> <strong>#1d4e89</strong> <span>Azul: avisos y servicios de agua</span></p>
+          </li>
+          <li class="muestra-color" style="--muestra: var(--color-fondo)">
+            <p class="muestra-color__datos"><code>--color-fondo</code> <strong>#dbdbdb</strong> <span>Fondo general</span></p>
+          </li>
+          <li class="muestra-color" style="--muestra: var(--color-superficie)">
+            <p class="muestra-color__datos"><code>--color-superficie</code> <strong>#f3f3f3</strong> <span>Tarjetas y bloques claros</span></p>
+          </li>
+          <li class="muestra-color" style="--muestra: var(--color-texto)">
+            <p class="muestra-color__datos"><code>--color-texto</code> <strong>#111111</strong> <span>Texto sobre fondos claros</span></p>
+          </li>
+          <li class="muestra-color" style="--muestra: var(--color-texto-claro)">
+            <p class="muestra-color__datos"><code>--color-texto-claro</code> <strong>#ffffff</strong> <span>Texto sobre fondos oscuros</span></p>
+          </li>
+          <li class="muestra-color" style="--muestra: var(--color-borde)">
+            <p class="muestra-color__datos"><code>--color-borde</code> <strong>#d9d9d9</strong> <span>Líneas y bordes</span></p>
+          </li>
+          <li class="muestra-color" style="--muestra: var(--color-sobre-oscuro)">
+            <p class="muestra-color__datos"><code>--color-sobre-oscuro</code> <strong>#ffffff</strong> <span>Texto sobre rojo, azul o negro</span></p>
+          </li>
+        </ul>
+        <h3 class="documentacion__subtitulo">Escala tipográfica · ADLaM Display</h3>
+        <ul class="escala">
+          <li class="escala__fila" style="--muestra: var(--tipo-pequeno)">
+            <p class="escala__nombre"><code>--tipo-pequeno</code><br>0.875rem · 14 px<br>Textos de tarjetas y etiquetas</p>
+            <p class="escala__muestra" aria-hidden="true">Berisso</p>
+          </li>
+          <li class="escala__fila" style="--muestra: var(--tipo-base)">
+            <p class="escala__nombre"><code>--tipo-base</code><br>clamp(1.25rem, 0.9rem + 1vw, 2.25rem) · 20–36 px<br>Párrafos</p>
+            <p class="escala__muestra" aria-hidden="true">Berisso</p>
+          </li>
+          <li class="escala__fila" style="--muestra: var(--tipo-medio)">
+            <p class="escala__nombre"><code>--tipo-medio</code><br>1.5rem · 24 px<br>Títulos secundarios en celular</p>
+            <p class="escala__muestra" aria-hidden="true">Berisso</p>
+          </li>
+          <li class="escala__fila" style="--muestra: var(--tipo-grande)">
+            <p class="escala__nombre"><code>--tipo-grande</code><br>2rem · 32 px<br>Título principal en celular</p>
+            <p class="escala__muestra" aria-hidden="true">Berisso</p>
+          </li>
+          <li class="escala__fila" style="--muestra: var(--tipo-titulo-chico-desktop)">
+            <p class="escala__nombre"><code>--tipo-titulo-chico-desktop</code><br>3.125rem · 50 px<br>Títulos de sección en compu</p>
+            <p class="escala__muestra" aria-hidden="true">Berisso</p>
+          </li>
+          <li class="escala__fila" style="--muestra: var(--tipo-display)">
+            <p class="escala__nombre"><code>--tipo-display</code><br>7.5rem · 120 px<br>Techo del título principal (--tipo-hero)</p>
+            <p class="escala__muestra" aria-hidden="true">Berisso</p>
+          </li>
+        </ul>
+        <h3 class="documentacion__subtitulo">Escala de espaciado</h3>
+        <ul class="escala">
+          <li class="escala__fila" style="--muestra: var(--espacio-xs)">
+            <p class="escala__nombre"><code>--espacio-xs</code><br>0.5rem · 8 px</p>
+            <div class="escala__barra" aria-hidden="true"></div>
+          </li>
+          <li class="escala__fila" style="--muestra: var(--espacio-sm)">
+            <p class="escala__nombre"><code>--espacio-sm</code><br>1rem · 16 px</p>
+            <div class="escala__barra" aria-hidden="true"></div>
+          </li>
+          <li class="escala__fila" style="--muestra: var(--espacio-md)">
+            <p class="escala__nombre"><code>--espacio-md</code><br>1.5rem · 24 px</p>
+            <div class="escala__barra" aria-hidden="true"></div>
+          </li>
+          <li class="escala__fila" style="--muestra: var(--espacio-lg)">
+            <p class="escala__nombre"><code>--espacio-lg</code><br>3rem · 48 px</p>
+            <div class="escala__barra" aria-hidden="true"></div>
+          </li>
+          <li class="escala__fila" style="--muestra: var(--espacio-seccion)">
+            <p class="escala__nombre"><code>--espacio-seccion</code><br>clamp(3rem, 8vw, 6rem)</p>
+            <div class="escala__barra" aria-hidden="true"></div>
+          </li>
+        </ul>
+        <div class="documentacion__texto">
+          <p>Variables de apoyo: <code>--radio</code>, <code>--borde</code>, <code>--ancho-max</code>, <code>--columnas</code> y <code>--separacion</code> (estas dos últimas cambian con las media queries para pasar la grilla de 4 a 8 y a 12 columnas).</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion seccion--compacta documentacion" id="inventario" aria-labelledby="titulo-inventario">
+      <div class="grilla">
+        <h2 class="seccion__titulo" id="titulo-inventario">d) Inventario de componentes</h2>
+        <div class="documentacion__texto">
+          <p>Las clases siguen la convención BEM (<code>bloque__elemento--modificador</code>): por ejemplo <code>.tarjeta</code>, <code>.tarjeta__titulo</code> y <code>.tarjeta--destacada</code>. Los tres niveles atómicos también ordenan el archivo <code>estilos.css</code>: la sección 4 son los átomos, la 5 las moléculas y la 6 los organismos.</p>
+        </div>
+        <div class="inventario">
+          <h3 class="inventario__titulo">Átomos</h3>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ejemplo__muestra--fondo">
+              <a class="boton" href="#inventario">Asociate</a>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.boton</code><span>Acción principal sobre fondo claro.</span></figcaption>
+          </figure>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ejemplo__muestra--roja">
+              <a class="boton boton--sobre-oscuro" href="#inventario">Asociate</a>
+              <a class="boton boton--secundario" href="#inventario">Sumate</a>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.boton--sobre-oscuro · .boton--secundario</code><span>Variantes para usar sobre rojo o negro.</span></figcaption>
+          </figure>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ">
+              <a class="enlace" href="#inventario">Enlace de texto</a>
+              <a class="enlace--acento-claro" href="#inventario">@bomberosberisso</a>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.enlace · .enlace--acento-claro</code><span>El naranja se oscurece sobre fondos claros para cumplir contraste AA.</span></figcaption>
+          </figure>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ejemplo__muestra--oscura">
+              <span class="etiqueta">Prevención</span>
+              <span class="etiqueta etiqueta--agua">Agua</span>
+              <span class="etiqueta etiqueta--texto">Servicio principal</span>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.etiqueta · --agua · --texto</code><span>Clasifican el tipo de servicio.</span></figcaption>
+          </figure>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ">
+              <svg width="20" height="20" class="icono" aria-hidden="true" focusable="false"><use href="#i-llama"/></svg> <svg width="20" height="20" class="icono" aria-hidden="true" focusable="false"><use href="#i-casco"/></svg> <svg width="20" height="20" class="icono" aria-hidden="true" focusable="false"><use href="#i-gota"/></svg> <svg width="20" height="20" class="icono" aria-hidden="true" focusable="false"><use href="#i-telefono"/></svg> <svg width="20" height="20" class="icono" aria-hidden="true" focusable="false"><use href="#i-sirena"/></svg> <svg width="20" height="20" class="icono" aria-hidden="true" focusable="false"><use href="#i-auto"/></svg> <svg width="20" height="20" class="icono" aria-hidden="true" focusable="false"><use href="#i-huella"/></svg> <svg width="20" height="20" class="icono" aria-hidden="true" focusable="false"><use href="#i-ubicacion"/></svg>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.icono</code><span>SVG con fill: currentColor; toma el color del texto.</span></figcaption>
+          </figure>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ">
+              <img class="imagen ejemplo__miniatura" src="img/hero-bomberos.jpg" alt="Bomberos combatiendo un incendio">
+            </div>
+            <figcaption class="ejemplo__pie"><code>.imagen</code><span>Foto del hero, recortada con object-fit: cover.</span></figcaption>
+          </figure>
+          <h3 class="inventario__titulo">Moléculas</h3>
+          <figure class="ejemplo ejemplo--ancho">
+            <div class="demo-cq ejemplo__muestra--fondo">
+              <div class="demo-cq__angosta">
+                <article class="tarjeta tarjeta--destacada tarjeta--enlace">
+                  <div class="tarjeta__contenido">
+                    <p class="etiqueta etiqueta--texto">Servicio principal</p>
+                    <h4 class="tarjeta__titulo"><a class="tarjeta__enlace" href="que-hacemos.html#incendios">Incendios</a></h4>
+                    <p class="tarjeta__texto">Combatimos incendios en la ciudad, el puerto y el polo industrial.</p>
+                    <p class="tarjeta__mas" aria-hidden="true">Ver más →</p>
+                    <svg width="20" height="20" class="icono tarjeta__icono" aria-hidden="true" focusable="false"><use href="#i-llama"/></svg>
+                  </div>
+                </article>
+              </div>
+              <div>
+                <article class="tarjeta tarjeta--destacada tarjeta--enlace">
+                  <div class="tarjeta__contenido">
+                    <p class="etiqueta etiqueta--texto">Servicio principal</p>
+                    <h4 class="tarjeta__titulo"><a class="tarjeta__enlace" href="que-hacemos.html#incendios">Incendios</a></h4>
+                    <p class="tarjeta__texto">Combatimos incendios en la ciudad, el puerto y el polo industrial.</p>
+                    <p class="tarjeta__mas" aria-hidden="true">Ver más →</p>
+                    <svg width="20" height="20" class="icono tarjeta__icono" aria-hidden="true" focusable="false"><use href="#i-llama"/></svg>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.tarjeta · .tarjeta--destacada · .tarjeta--enlace · @container tarjeta (min-width: 30rem)</code><span>Toda la tarjeta es clickeable: el enlace del título se estira con ::after. La misma tarjeta en un contenedor angosto (izquierda) y en uno ancho (derecha): el viewport es el mismo, cambia solo el espacio disponible. En celular las dos quedan angostas.</span></figcaption>
+          </figure>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ejemplo__muestra--fondo ejemplo__muestra--columna">
+              <div class="dato"><p class="dato__cifra">1924</p><p class="dato__descripcion">Año de fundación</p></div>
+              <div class="dato dato--oscuro"><p class="dato__cifra">Clarimundo Morgada</p><p class="dato__descripcion">Primer jefe</p></div>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.dato · .dato--oscuro</code><span>Cifra + descripción.</span></figcaption>
+          </figure>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ">
+              <ol class="pasos__lista"><li class="paso"><p class="paso__texto">Tener entre 18 y 40 años.</p></li><li class="paso"><p class="paso__texto">Hacer una entrevista previa.</p></li></ol>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.paso</code><span>El número sale de un contador CSS sobre una lista ordenada.</span></figcaption>
+          </figure>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ejemplo__muestra--fondo ejemplo__muestra--columna">
+              <ul class="contacto__lista"><li class="contacto-item"><svg width="20" height="20" class="icono" aria-hidden="true" focusable="false"><use href="#i-telefono"/></svg><span class="contacto-item__texto"><span class="contacto-item__etiqueta">Teléfono</span> <a class="enlace--acento-claro" href="tel:+542214612425">(0221) 461-2425</a></span></li></ul>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.contacto-item</code><span>Ícono + etiqueta + valor.</span></figcaption>
+          </figure>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ejemplo__muestra--oscura">
+              <p class="emergencia">En una emergencia, llamá al <a class="emergencia__numero" href="tel:100">100</a></p>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.emergencia</code><span>El 100 siempre visible, dentro de la .franja.</span></figcaption>
+          </figure>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ">
+              <ul class="etiquetas"><li class="etiqueta">RCP</li><li class="etiqueta">Primeros auxilios</li><li class="etiqueta etiqueta--agua">Río</li></ul>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.etiquetas</code><span>Grupo de .etiqueta que se acomoda con flex-wrap (Qué hacemos).</span></figcaption>
+          </figure>
+          <figure class="ejemplo ">
+            <div class="ejemplo__muestra ejemplo__muestra--columna">
+              <p class="aviso">Hoy hay lista de espera.</p>
+              <p class="aviso aviso--relleno">El personal está las 24 horas.</p>
+            </div>
+            <figcaption class="ejemplo__pie"><code>.aviso · .aviso--relleno · .aviso--neutro</code><span>Notas importantes en azul.</span></figcaption>
+          </figure>
+          <h3 class="inventario__titulo">Organismos</h3>
+          <ul class="escala inventario__lista">
+            <li class="escala__fila"><p class="escala__nombre"><code>.encabezado + .navegacion</code></p><p class="escala__nombre">Marca y navegación. En celular el menú se abre con :target (#menu), sin JavaScript.</p></li>
+            <li class="escala__fila"><p class="escala__nombre"><code>.hero</code></p><p class="escala__nombre">Foto al 26 % sobre rojo, titular, bajada y botones.</p></li>
+            <li class="escala__fila"><p class="escala__nombre"><code>.franja</code></p><p class="escala__nombre">Barra negra con dos .emergencia que separa las secciones.</p></li>
+            <li class="escala__fila"><p class="escala__nombre"><code>.seccion</code></p><p class="escala__nombre">Contenedor de ancho completo con una .grilla adentro.</p></li>
+            <li class="escala__fila"><p class="escala__nombre"><code>.servicios</code></p><p class="escala__nombre">Lista de .tarjeta sobre una subgrilla (subgrid).</p></li>
+            <li class="escala__fila"><p class="escala__nombre"><code>.pasos · .pasos--rojo</code></p><p class="escala__nombre">Asociate y Sumate: título, lista de .paso y .aviso.</p></li>
+            <li class="escala__fila"><p class="escala__nombre"><code>.contacto</code></p><p class="escala__nombre">Lista de .contacto-item, .mapa y .aviso--relleno.</p></li>
+            <li class="escala__fila"><p class="escala__nombre"><code>.hitos</code></p><p class="escala__nombre">Línea de tiempo de .hito (también con container query).</p></li>
+            <li class="escala__fila"><p class="escala__nombre"><code>.pie</code></p><p class="escala__nombre">Marca, aclaración de sitio no oficial y enlaces a todas las páginas.</p></li>
+            <li class="escala__fila"><p class="escala__nombre"><code>.columna-principal · .columna-lateral</code></p><p class="escala__nombre">Ubican texto (cols 1–7) y datos o etiquetas (cols 9–12) en las páginas de detalle.</p></li>
+            <li class="escala__fila"><p class="escala__nombre"><code>Páginas de detalle</code></p><p class="escala__nombre">Historia, Qué hacemos, Asociate, Sumate y Contacto reutilizan .hero--liso, .seccion, .franja, .pasos y .datos.</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion seccion--compacta documentacion" id="decisiones" aria-labelledby="titulo-decisiones">
+      <div class="grilla">
+        <h2 class="seccion__titulo" id="titulo-decisiones">e) Decisiones técnicas</h2>
+        <div class="documentacion__texto">
+          <p><strong>La grilla.</strong> El <code>body</code> es una grilla de tres filas (encabezado, <code>main</code> y pie). Cada <code>.seccion</code> ocupa todo el ancho para que su fondo llegue de borde a borde, y adentro lleva una única <code>.grilla</code> que usa <code>repeat(var(--columnas), 1fr)</code>. Las media queries no redefinen el layout: solo cambian <code>--columnas</code> de 4 a 8 (48rem) y a 12 (80rem). La grilla de servicios usa <code>subgrid</code>, así las tarjetas se alinean con las mismas columnas que el título: la destacada ocupa 8 y las comunes 4. Las páginas de detalle usan la misma grilla con dos clases reutilizables, <code>.columna-principal</code> y <code>.columna-lateral</code>. Flexbox queda para lo chico: la navegación, los botones y el interior de las tarjetas.</p>
+          <p><strong>Container queries.</strong> Las usa <code>.tarjeta</code>. Cuando su contenedor supera 30rem, la tarjeta pasa a dos columnas, el título sube a <code>--tipo-titulo-chico-desktop</code> y aparece el ícono. Una media query no alcanzaba: en tablet el viewport es ancho, pero las tarjetas comunes van de a dos y quedan angostas, mientras que la de Incendios ocupa todo el ancho. Con la container query cada tarjeta responde a su propio espacio. La línea de tiempo de la página de historia (<code>.hito</code>) usa el mismo recurso: en contenedores anchos el año pasa a la izquierda.</p>
+          <p><strong>Lo más difícil.</strong> Sostener la regla de no escribir ningún valor fuera de <code>:root</code>: la franja de seguridad del encabezado, la opacidad de la foto del hero y las sombras también tuvieron que armarse con variables y <code>color-mix()</code>. El otro desafío fue el naranja de acento: sobre negro funciona, pero sobre fondos claros no alcanza el contraste mínimo, así que se creó <code>--color-acento-legible</code>, derivado del mismo naranja.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="grilla">
+      <div class="pie__bloque">
+        <p class="pie__marca">Bomberos voluntarios <span>de Berisso</span></p>
+      </div>
+      <div class="pie__bloque">
+        <p>Sitio no oficial, realizado como trabajo práctico final. Los datos de contacto corresponden a la Sociedad de Bomberos Voluntarios de Berisso.</p>
+      </div>
+      <nav class="pie__bloque" aria-label="Enlaces del pie">
+        <ul class="pie__lista">
+          <li><a class="enlace--acento" href="historia.html">Nuestra historia</a></li>
+          <li><a class="enlace--acento" href="que-hacemos.html">Qué hacemos</a></li>
+          <li><a class="enlace--acento" href="asociate.html">Asociate</a> · <a class="enlace--acento" href="sumate.html">Sumate</a></li>
+          <li><a class="enlace--acento" href="contacto.html">Contacto y visitas</a></li>
+          <li><a class="enlace--acento" href="documentacion.html">Documentación del sistema</a></li>
+          <li><a class="enlace--acento" href="https://www.instagram.com/bomberosberisso/">Instagram @bomberosberisso</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
